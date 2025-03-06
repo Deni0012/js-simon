@@ -35,3 +35,84 @@ buttonElement.addEventListener("click", function (event) {
 
     checkAnswer(numberOfAnswer, correctAnswersString);
 })
+
+// Funzioni
+function generateRandomNumber(arr) {
+
+    while (arr.length < 5) {
+        const newNumber = randomNumber();
+        if (!arr.includes(newNumber)) {
+            arr.push(newNumber);
+        }
+    }
+
+    return arr;
+}
+
+function generateListElement(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        const newLi = document.createElement("li");
+        newLi.textContent = arr[i];
+        numbersListElement.appendChild(newLi);
+    }
+}
+
+function countdownTimer() {
+    if (count > 0) {
+        count--;
+    } else {
+        clearInterval(gameTimer);
+        numbersListElement.classList.add("d-none");
+        answersFormElement.classList.remove("d-none");
+        instructionsElement.innerText = "Inserisci tutti i numeri che ricordi(l'ordine non è importante)"
+    }
+    countdownElement.innerText = count;
+    return count;
+}
+
+
+function takeInput() {
+    const inputs = document.querySelectorAll("#input-group input");
+    const values = [];
+
+    for (let i = 0; i < inputs.length; i++) {
+        const input = Number(inputs[i].value);
+        const isANumber = !isNaN(input);
+        if (isANumber && input > 0) {
+            values.push(input)
+        } else {
+            messageElement.innerText = "Hai inserito dei valori sbagliati o mancanti, riprova!";
+            return null;
+        }
+    }
+    return values;
+}
+
+
+function checkInput(solutions, answers) {
+    const correctAnswerArray = [];
+    for (let i = 0; i < solutions.length; i++) {
+        const solution = Number(solutions[i]);
+
+        for (let x = 0; x < answers.length; x++) {
+            const answer = Number(answers[x]);
+
+            if (answer === solution) {
+                correctAnswerArray.push(solution);
+            }
+        }
+    }
+    return correctAnswerArray;
+}
+
+function checkAnswer(numOFCorrectAnswer, AnswersString) {
+    if (numOFCorrectAnswer > 0) {
+        if (numOFCorrectAnswer === 1) {
+            messageElement.innerText = `${numOFCorrectAnswer} risposta esatta!. Di preciso: ${AnswersString}`;
+        } else {
+            messageElement.innerText = `${numOFCorrectAnswer} risposte esatte!. Di preciso: ${AnswersString}`;
+        }
+    } else {
+        messageElement.innerText = `${numOFCorrectAnswer} risposte esatte! . Riprovaci con più impegno`;
+    }
+}
