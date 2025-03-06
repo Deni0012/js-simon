@@ -7,3 +7,11 @@ const messageElement = document.getElementById("message");
 const instructionsElement = document.getElementById("instructions")
 
 const numbersListArr = [];
+
+
+// Random 
+const randomNumber = () => parseInt(Math.random() * (50 - 1) + 1);
+const numbersListGenerated = generateRandomNumber(numbersListArr);
+generateListElement(numbersListGenerated);
+
+
