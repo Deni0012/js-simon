@@ -17,3 +17,21 @@ generateListElement(numbersListGenerated);
 // Timer countdown
 let count = 10;
 const gameTimer = setInterval(countdownTimer, 1000);
+
+// Input 
+
+buttonElement.addEventListener("click", function (event) {
+    event.preventDefault();
+    messageElement.innerText = ""
+    const values = takeInput();
+
+    if (values === null) {
+        return;
+    }
+
+    const correctAnswers = checkInput(values, numbersListGenerated);
+    const numberOfAnswer = correctAnswers.length;
+    const correctAnswersString = correctAnswers.join(", ");
+
+    checkAnswer(numberOfAnswer, correctAnswersString);
+})
