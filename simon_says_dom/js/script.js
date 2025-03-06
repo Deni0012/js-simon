@@ -14,4 +14,6 @@ const randomNumber = () => parseInt(Math.random() * (50 - 1) + 1);
 const numbersListGenerated = generateRandomNumber(numbersListArr);
 generateListElement(numbersListGenerated);
 
-
+// Timer countdown
+let count = 10;
+const gameTimer = setInterval(countdownTimer, 1000);
